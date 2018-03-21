@@ -6,15 +6,13 @@ Small prototype, currently only scaffolding for converting values to abstraction
 
 ## Running Demo
 Run the prototype.
-```
-bash
+```bash
 python src/app.py
 ``` 
 Follow the instructions in the console.
 
 ## Tests
 Run the tests.
-```
-bash
+```bash
 python -m unittest src/AbstractorModule/abstractor_tests.py
 ```
