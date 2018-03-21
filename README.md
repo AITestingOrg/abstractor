@@ -7,6 +7,8 @@ Small prototype, currently only scaffolding for converting values to abstraction
 ## Running Demo
 Run the prototype.
 ```bash
+pip install -r requirements.txt
+pip install -U spacy
 python src/app.py
 ``` 
 Follow the instructions in the console.
@@ -14,5 +16,6 @@ Follow the instructions in the console.
 ## Tests
 Run the tests.
 ```bash
-python -m unittest src/AbstractorModule/abstractor_tests.py
+pip install -r requirements.txt
+pytest
 ```
