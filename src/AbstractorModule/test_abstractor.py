@@ -18,6 +18,6 @@ def test_dollar_value_returns_valid_currency():
     assert get_abstraction('$5.00') == ABSTRACTIONS['MONEY']
 
 
-def test_invalid_input(self):
+def test_invalid_input():
     with pytest.raises(Exception):
         get_abstraction({})
