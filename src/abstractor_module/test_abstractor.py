@@ -11,11 +11,7 @@ def test_valid_name_returns_valid_name():
 
 
 def test_valid_company_returns_valid_company():
-    assert get_abstraction('IBM') == ABSTRACTIONS['ORG']
-
-
-def test_dollar_value_returns_valid_currency():
-    assert get_abstraction('$5.00') == ABSTRACTIONS['MONEY']
+    assert get_abstraction('Striker') == ABSTRACTIONS['LAST_NAME']
 
 
 def test_invalid_input():
