@@ -9,6 +9,7 @@ Run the prototype.
 ```bash
 pip install -r requirements.txt
 pip install -U spacy
+python -m spacy download en
 python src/app.py
 ``` 
 Follow the instructions in the console.
@@ -17,5 +18,6 @@ Follow the instructions in the console.
 Run the tests.
 ```bash
 pip install -r requirements.txt
+python -m spacy download en
 pytest
 ```
