@@ -77,8 +77,12 @@ def test_model(test_data):
     Todo: Create cases with more context (labels from inputs, etc...) also, resolve ambiguity in the model
     with popular first names that are also last names.
     Some things to try
-    * use the frequency to inject a higher number of similar cases
+    * Use the frequency to inject a higher number of similar cases
     * Get more context on the input
+    * Trim the last name data to be about the size of first name
+    ( It appears that the skew is offsetting the weights and labeling almost all PERSON entities to LAST_NAME)
+    I am making this assumption because things that were originally not labeled PERSON work if they are not also
+    in the last name data set.
     '''
     print('Testing the trained model with {:d} test instances...'.format(len(test_data)))
     dirname = path.dirname(__file__)
