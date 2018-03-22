@@ -1,4 +1,5 @@
 # Abstractor Prototype
+[![Build Status](https://travis-ci.org/AITestingOrg/abstractor.svg?branch=master)](https://travis-ci.org/AITestingOrg/abstractor)
 Small prototype, currently only scaffolding for converting values to abstractions.
 
 ## Features
