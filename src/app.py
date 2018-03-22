@@ -27,6 +27,7 @@ def main():
             train.train_model(save=True, drop_rate=drop_rate, iters=iters)
             print('Done.')
         elif str_input == '4':
+            print('This is testing on training data and only one type of data that has ambiguity, it... this is just for making sure the tester code is working.)
             print('Testing model...')
             train.test_model(person_names.last_name_train_data())
             print('Done.')
