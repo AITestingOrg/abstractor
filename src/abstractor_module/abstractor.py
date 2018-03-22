@@ -20,7 +20,7 @@ def get_abstraction(str_input):
     '''
 
     if not isinstance(str_input, str):
-        raise Exception('Only strings but found: {:s}'.format(value))
+        raise Exception('Only strings but found: {:s}'.format(str_input))
 
     if len(str_input.split(' ')) > 1:
         return get_fragment_abstraction(str_input)
