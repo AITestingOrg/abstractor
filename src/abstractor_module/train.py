@@ -57,7 +57,7 @@ def train_model(model_name='default', iters=15, save=False):
             print('Training iteration {:d} starting...'.format(itn + 1))
             np.random.shuffle(train_data)
             losses = {}
-            [NLP.update([text], [annotations], sgd=optimizer, losses=losses, drop=0.35) for text, annotations in train_data]
+            [NLP.update([text], [annotations], sgd=optimizer, losses=losses) for text, annotations in train_data]
             print(losses)
             print('Training iteration {:d} complete...'.format(itn + 1))
 
