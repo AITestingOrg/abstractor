@@ -25,4 +25,4 @@ pytest
 ```
 
 ## Notes
-Currently the data is skewed toward `VALID_LAST_NAME` due to ambiguity in the data and the common PERSON entity. One thing to try would be to add more context to the data, input labels could be helpful here.
+Currently the data is skewed toward `VALID_LAST_NAME` due to ambiguity in the data and the common PERSON entity. One thing to try would be to add more context to the data, input labels could be helpful here. Also, moving to TensorFlow may be better than sticking with Spacy as we could more easily encode the meta data we may recieve in TensorFlow, leveraging the meta more in that way.
