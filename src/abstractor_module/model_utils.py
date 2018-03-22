@@ -5,6 +5,7 @@ used in the models
 from os import path
 import numpy as np
 import pandas
+from .abstractions import ABSTRACTIONS
 
 
 def convert_and_export_names():
@@ -14,8 +15,8 @@ def convert_and_export_names():
     Percent-Cumlative-Frequency Rank'
     '''
     dirname = path.dirname(__file__)
-    paths = [[path.join(dirname, './models/data/census-dist-all-first.txt'), 'VALID_FIRST_NAME'],
-             [path.join(dirname, './models/data/census-dist-all-last.txt'), 'VALID_LAST_NAME']]
+    paths = [[path.join(dirname, './models/data/census-dist-all-first.txt'), ABSTRACTIONS['FIRST_NAME']],
+             [path.join(dirname, './models/data/census-dist-all-last.txt'), ABSTRACTIONS['LAST_NAME']]]
     for file_path in paths:
         with open(file_path[0]) as file:
             content = file.readlines()
@@ -41,7 +42,7 @@ def load_first_names():
     Loads the first name DataFrame from a pickle
     '''
     dirname = path.dirname(__file__)
-    return pandas.read_pickle(path.join(dirname, './models/VALID_FIRST_NAME.pickle'))
+    return pandas.read_pickle(path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['FIRST_NAME'])))
 
 
 def load_last_names():
@@ -49,4 +50,4 @@ def load_last_names():
     Loads the last name DataFrame from a pickle
     '''
     dirname = path.dirname(__file__)
-    return pandas.read_pickle(path.join(dirname, './models/VALID_LAST_NAME.pickle'))
+    return pandas.read_pickle(path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['LAST_NAME'])))

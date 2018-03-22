@@ -3,7 +3,7 @@ Abstraction Constants
 '''
 
 ABSTRACTIONS = {
-    'PERSON': 'VALID_NAME',
-    'MONEY': 'VALID_CURRENCY',
+    'FIRST_NAME': 'VALID_FIRST_NAME',
+    'LAST_NAME': 'VALID_LAST_NAME',
     'ORG': 'VALID_COMPANY_NAME'
 }

@@ -7,7 +7,7 @@ from .abstractions import ABSTRACTIONS
 
 
 def test_valid_name_returns_valid_name():
-    assert get_abstraction('Jack') == ABSTRACTIONS['PERSON']
+    assert get_abstraction('Jack') == ABSTRACTIONS['FIRST_NAME']
 
 
 def test_valid_company_returns_valid_company():
