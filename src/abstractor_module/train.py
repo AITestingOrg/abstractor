@@ -19,7 +19,7 @@ def get_trained_model():
     return spacy.load(model_path)
 
 
-def train_model(model_name='default', iters=15, save=False):
+def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     '''
     Trains spaCy against the formatted data given by model_utils
     params:
@@ -57,7 +57,7 @@ def train_model(model_name='default', iters=15, save=False):
             print('Training iteration {:d} starting...'.format(itn + 1))
             np.random.shuffle(train_data)
             losses = {}
-            [NLP.update([text], [annotations], sgd=optimizer, losses=losses) for text, annotations in train_data]
+            [NLP.update([text], [annotations], sgd=optimizer, losses=losses, drop=drop_rate) for text, annotations in train_data]
             print(losses)
             print('Training iteration {:d} complete...'.format(itn + 1))
 
@@ -74,9 +74,13 @@ def train_model(model_name='default', iters=15, save=False):
 def test_model(test_data):
     '''
     Tests the trained model on test data
-    todo: add negative cases as this data set doesn't have any yet.
+    Todo: Create cases with more context (labels from inputs, etc...) also, resolve ambiguity in the model
+    with popular first names that are also last names.
+    Some things to try
+    * use the frequency to inject a higher number of similar cases
+    * Get more context on the input
     '''
-    print('Testing the trained model with {0:f} test instances...'.format(len(test_data)))
+    print('Testing the trained model with {:d} test instances...'.format(len(test_data)))
     dirname = path.dirname(__file__)
     file_path = path.join(dirname, './model')
     print('Loading model from', file_path)
@@ -85,11 +89,10 @@ def test_model(test_data):
     instances_tested = 0
     for text, annotations in test_data:
         doc = nlp(text)
-        print(doc.ents)
         for ent in doc.ents:
             instances_tested += 1
-            if annotations.entities[1][2] != ent.label_:
-                print('Error in prediction {:s} should have been {:s} but found {:s}'.format(text, annotations.entities[1][2], ent.label_))
+            if annotations['entities'][0][2] != ent.label_:
+                print('Error in prediction {:s} should have been {:s} but found {:s}'.format(text, annotations['entities'][0][2], ent.label_))
                 errors.append((text, annotations, ent.label_))
-    print('{0:f} instances tested...'.format(instances_tested))
-    print('Error rate {0:f}% of {0:f} test instances.'.format(int(len(errors) * 100 / instances_tested), len(test_data)))
+    print('{0:f} instances contained entities...'.format(instances_tested))
+    print('Error rate of {0:f}% for {:d} test instances.'.format((len(errors) * 100) / len(test_data), len(test_data)))
