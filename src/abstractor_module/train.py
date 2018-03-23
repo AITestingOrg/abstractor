@@ -4,7 +4,7 @@ Responsible for training the Spacy model
 from os import path
 import spacy
 import numpy as np
-from .person_names import first_name_train_data, last_name_train_data
+from .training_data import first_name_examples, last_name_examples
 from .abstractions import ABSTRACTIONS
 
 NLP = spacy.blank('en')

@@ -1,7 +1,6 @@
 '''
 Abstractor: Processes values and returns abstractions based on the input.
 '''
-from .abstractions import ABSTRACTIONS
 from .train import get_trained_model
 
 

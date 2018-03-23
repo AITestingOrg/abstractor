@@ -1,7 +1,7 @@
 '''
 Main file for abstractor prototype
 '''
-from abstractor_module import abstractor, model_utils, train, person_names
+from abstractor_module import abstractor, model_utils, train, training_data
 
 
 def main():
@@ -29,7 +29,7 @@ def main():
         elif str_input == '4':
             print('This is testing on training data and only one type of data that has ambiguity, it... this is just for making sure the tester code is working.')
             print('Testing model...')
-            train.test_model(person_names.last_name_train_data())
+            train.test_model(training_data.last_name_examples())
             print('Done.')
         else:
             print('Invalid input')
