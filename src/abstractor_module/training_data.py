@@ -4,6 +4,7 @@ Contains the example data for training spacy entity labels
 import numpy as np
 from .model_utils import load_first_names, load_last_names, load_emails
 
+
 def first_name_examples():
     '''
     Returns a spaCy model for training on first names

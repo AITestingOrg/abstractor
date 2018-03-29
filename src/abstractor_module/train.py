@@ -27,8 +27,8 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     save: if true it will save the model to disk
     '''
     print('Loading training data...')
-    first_name_data = first_name_train_data()
-    last_name_data = last_name_train_data()
+    first_name_data = first_name_examples()
+    last_name_data = last_name_examples()
     print('Seperate training data...')
     tmp = np.concatenate((first_name_data, last_name_data))
     np.random.shuffle(tmp)

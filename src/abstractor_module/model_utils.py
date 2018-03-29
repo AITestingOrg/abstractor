@@ -31,10 +31,10 @@ def convert_and_export_names():
         abstraction = np.empty(len(content), dtype=object)
         abstraction[:] = file_path[1]
         if file_path[1] == ABSTRACTIONS['FIRST_NAME']:
-            labels = [get_random_element(first_name_labels) for x in range(len(content))]
+            labels = np.array([get_random_element(first_name_labels) for x in range(len(content))])
         else:
-            labels = [get_random_element(last_name_labels) for x in range(len(content))]
-        df_dict = {'input': labels + content[:, 0],
+            labels = np.array([get_random_element(last_name_labels) for x in range(len(content))])
+        df_dict = {'input': np.core.defchararray.add(labels, content[:, 0]),
                    'word': content[:, 0],
                    'frequency': content[:, 1],
                    'label': abstraction}
@@ -48,15 +48,15 @@ def convert_and_export_emails():
     to a Pandas DataFrame.
     '''
     dirname = path.dirname(__file__)
-    fil_path = path.join(dirname, './models/data/random-email-address.txt')
+    file_path = path.join(dirname, './models/data/random-email-addresses.txt')
     with open(file_path) as file:
         content = file.readlines()
     content = np.array([x.replace('\n', '') for x in content])
     abstraction = np.empty(len(content), dtype=object)
     abstraction[:] = ABSTRACTIONS['EMAIL']
-    labels = [get_random_element(last_name_labels) for x in range(len(content))]
-    df_dict = {'input': labels + content[:, 0],
-               'word': content[:, 0],
+    labels = np.array([get_random_element(last_name_labels) for x in range(len(content))])
+    df_dict = {'input': np.core.defchararray.add(labels, content),
+               'word': content,
                'label': abstraction}
     data_frame = pandas.DataFrame(df_dict)
     data_frame.to_pickle(path=path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['EMAIL'])))
