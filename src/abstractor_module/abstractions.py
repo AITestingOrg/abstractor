@@ -9,5 +9,5 @@ ABSTRACTIONS = {
     'EMAIL': 'VALID_EMAIL',
     'MONEY': 'MONEY',
     'BIRTHDAY': 'VALID_DATE',
-    'USERNAME': 'VALID_USERNAME' # this one will get tricky when emails are usernames
+    'USERNAME': 'VALID_USERNAME'
 }

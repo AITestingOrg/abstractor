@@ -4,7 +4,7 @@ Responsible for training the Spacy model
 from os import path
 import spacy
 import numpy as np
-from .training_data import first_name_examples, last_name_examples
+from .training_data import first_name_examples, last_name_examples, email_examples
 from .abstractions import ABSTRACTIONS
 
 NLP = spacy.blank('en')
@@ -29,8 +29,9 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     print('Loading training data...')
     first_name_data = first_name_examples()
     last_name_data = last_name_examples()
+    email_data = email_examples()
     print('Seperate training data...')
-    tmp = np.concatenate((first_name_data, last_name_data))
+    tmp = np.concatenate((first_name_data, last_name_data, email_data))
     np.random.shuffle(tmp)
     test_index = int(len(tmp) * 0.6)
     train_data = tmp[:test_index]
