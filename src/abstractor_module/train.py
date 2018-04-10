@@ -34,7 +34,7 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     tmp = np.concatenate((first_name_data, last_name_data, email_data))
     np.random.shuffle(tmp)
     test_index = int(len(tmp) * 0.6)
-    train_data = tmp[:test_index][:100]
+    train_data = tmp[:test_index][:1000]
     test_data = tmp[test_index:]
 
     # Add entity recognizer to model if it's not in the pipeline
@@ -48,6 +48,7 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
 
     ner.add_label(ABSTRACTIONS['FIRST_NAME'])
     ner.add_label(ABSTRACTIONS['LAST_NAME'])
+    ner.add_label(ABSTRACTIONS['EMAIL'])
 
     # get names of other pipes to disable them during training
     other_pipes = [pipe for pipe in NLP.pipe_names if pipe != 'ner']

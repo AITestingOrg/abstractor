@@ -1,4 +1,4 @@
-Å´transitions⁄f[
+Å´transitions⁄’[
   {
     "clas":0,
     "move":1,
@@ -49,6 +49,30 @@
   },
   {
     "clas":8,
+    "move":1,
+    "label":"VALID_EMAIL",
+    "name":"B-VALID_EMAIL"
+  },
+  {
+    "clas":9,
+    "move":2,
+    "label":"VALID_EMAIL",
+    "name":"I-VALID_EMAIL"
+  },
+  {
+    "clas":10,
+    "move":3,
+    "label":"VALID_EMAIL",
+    "name":"L-VALID_EMAIL"
+  },
+  {
+    "clas":11,
+    "move":4,
+    "label":"VALID_EMAIL",
+    "name":"U-VALID_EMAIL"
+  },
+  {
+    "clas":12,
     "move":5,
     "label":"",
     "name":"O"
