@@ -1,5 +1,5 @@
 '''
-
+Converts from NER format to CONLL format, could be used in the future for training via CLI with mini-batches.
 '''
 import spacy
 from spacy.gold import biluo_tags_from_offsets
@@ -10,6 +10,7 @@ import time
 
 def convert():
     '''
+    Gathers the data and formats it using BILUO, then wrhites it in CONLL format to a file.
     '''
     start = time.time()
     print('Loading spaCy...')
