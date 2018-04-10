@@ -54,7 +54,7 @@ def convert_and_export_emails():
     content = np.array([x.replace('\n', '') for x in content])
     abstraction = np.empty(len(content), dtype=object)
     abstraction[:] = ABSTRACTIONS['EMAIL']
-    labels = np.array([get_random_element(last_name_labels) for x in range(len(content))])
+    labels = np.array([get_random_element(email_labels) for x in range(len(content))])
     df_dict = {'input': np.core.defchararray.add(labels, content.capitalize()),
                'word': content,
                'label': abstraction}
