@@ -34,7 +34,8 @@ def convert_and_export_names():
             labels = np.array([get_random_element(first_name_labels) for x in range(len(content))])
         else:
             labels = np.array([get_random_element(last_name_labels) for x in range(len(content))])
-        df_dict = {'input': np.core.defchararray.add(labels, content[:, 0].capitalize()),
+        print(content[:,0])
+        df_dict = {'input': np.core.defchararray.add(labels, np.char.capitalize(content[:, 0])),
                    'word': content[:, 0],
                    'frequency': content[:, 1],
                    'label': abstraction}
@@ -55,7 +56,7 @@ def convert_and_export_emails():
     abstraction = np.empty(len(content), dtype=object)
     abstraction[:] = ABSTRACTIONS['EMAIL']
     labels = np.array([get_random_element(email_labels) for x in range(len(content))])
-    df_dict = {'input': np.core.defchararray.add(labels, content.capitalize()),
+    df_dict = {'input': np.core.defchararray.add(labels, np.char.capitalize(content)),
                'word': content,
                'label': abstraction}
     data_frame = pandas.DataFrame(df_dict)
