@@ -28,16 +28,17 @@ def convert_and_export_names():
         with open(file_path[0]) as file:
             content = file.readlines()
         content = np.array([np.array([y for y in x.split(' ') if y != '']) for x in content if x != '\n'])
+        np.random.shuffle(content)
+        content = content[:5000]
+        if file_path[1] == ABSTRACTIONS['FIRST_NAME']:
+            labels = first_name_labels
+        else:
+            labels = last_name_labels
+        content = np.transpose([np.tile(labels, len(content)), np.repeat(content[:, 0], len(labels))])
         abstraction = np.empty(len(content), dtype=object)
         abstraction[:] = file_path[1]
-        if file_path[1] == ABSTRACTIONS['FIRST_NAME']:
-            labels = np.array([get_random_element(first_name_labels) for x in range(len(content))])
-        else:
-            labels = np.array([get_random_element(last_name_labels) for x in range(len(content))])
-        print(content[:,0])
-        df_dict = {'input': np.core.defchararray.add(labels, np.char.capitalize(content[:, 0])),
-                   'word': content[:, 0],
-                   'frequency': content[:, 1],
+        df_dict = {'input': np.core.defchararray.add(content[:, 0], np.char.capitalize(content[:, 1])),
+                   'word': content[:, 1],
                    'label': abstraction}
         data_frame = pandas.DataFrame(df_dict)
         data_frame.to_pickle(path=path.join(dirname, './models/{:s}.pickle'.format(file_path[1])))
@@ -53,11 +54,11 @@ def convert_and_export_emails():
     with open(file_path) as file:
         content = file.readlines()
     content = np.array([x.replace('\n', '') for x in content])
+    content = np.transpose([np.tile(email_labels, len(content)), np.repeat(content, len(email_labels))])
     abstraction = np.empty(len(content), dtype=object)
     abstraction[:] = ABSTRACTIONS['EMAIL']
-    labels = np.array([get_random_element(email_labels) for x in range(len(content))])
-    df_dict = {'input': np.core.defchararray.add(labels, np.char.capitalize(content)),
-               'word': content,
+    df_dict = {'input': np.core.defchararray.add(content[:, 0], content[:, 1]),
+               'word': content[:, 1],
                'label': abstraction}
     data_frame = pandas.DataFrame(df_dict)
     data_frame.to_pickle(path=path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['EMAIL'])))
