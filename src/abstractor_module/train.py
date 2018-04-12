@@ -34,7 +34,7 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     tmp = np.concatenate((first_name_data, last_name_data, email_data))
     np.random.shuffle(tmp)
     test_index = int(len(tmp) * 0.6)
-    train_data = tmp[:test_index][:1000]
+    train_data = tmp[:test_index]
     test_data = tmp[test_index:]
 
     # Add entity recognizer to model if it's not in the pipeline
@@ -82,9 +82,6 @@ def test_model(test_data):
     * Use the frequency to inject a higher number of similar cases
     * Get more context on the input
     * Trim the last name data to be about the size of first name
-    ( It appears that the skew is offsetting the weights and labeling almost all PERSON entities to LAST_NAME)
-    I am making this assumption because things that were originally not labeled PERSON work if they are not also
-    in the last name data set.
     '''
     print('Testing the trained model with {:d} test instances...'.format(len(test_data)))
     dirname = path.dirname(__file__)
