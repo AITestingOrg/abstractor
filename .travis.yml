@@ -1,13 +1,31 @@
 language: python
 python:
-  - "3.6"
-
-# command to install dependencies
+- '3.6'
+before_install:
+- echo "Testing Docker Hub credentials"
+- docker -v
+- docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+- echo "Docker Hub credentials are working"
 install:
-  - pip install spacy
-  - python -m spacy download en
-  - pip install -r requirements.txt
-
-# command to run tests
+- pip install spacy
+- python -m spacy download en
+- pip install -r requirements.txt
 script:
-  - pytest # or py.test for Python versions 3.5 and below
+- pytest
+after_success:
+- export ACTUAL_BRANCH=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH;
+  else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
+- echo "Test Success - BranchActual($ACTUAL_BRANCH) Pull Request($TRAVIS_PULL_REQUEST)
+  Tag($TRAVIS_TAG) PR($TRAVIS_PULL_REQUEST) Build($TRAVIS_BUILD_NUMBER)"
+- if [[ "$ACTUAL_BRANCH" == "master" ]]; then echo -e "Push Container to Docker Hub";
+  fi
+- docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
+- export REPO=aista/abstractor
+- export TAG=`if [ "$ACTUAL_BRANCH" == "master" ]; then echo "latest";else echo "";
+  fi`
+- docker build -f Dockerfile -t $REPO:$TAG .
+- docker push $REPO
+env:
+  global:
+  - secure: IUW8oW7h4JuFq++5ZbgqwcR5joPMobJT2iA331vbcUtZOvUOxM7GgbTMnWT5IsdhUdyQF0BdOxDGd/t/zinpuJImfqHy3WVuaemetjKaPIZuApe5WrQo1wu8Qq9SHeQ7Bdrdhjn29UL/Ssqo/zy5EhGK6A4cLP6Zdt9OXedFWbMUGxjfaMxVRUIfJ6XobD+n+GM2z9sP5VC4eCxhCMoXzdHywldb4c4Ok4bynDYPCBr1z0ANRaCPc09F4H7gaKDMEZsaYs0mLFG7Ol4GGKujuSJFhnPREIe/UukoNnbKiHgvPrr0puXbFzYJwfBOd4yhGtS7uEofe4Z+gA4mZ9FPuMLTz9LkkDr0nUza3buGhYfSB9oEBtxvcpQyRt3jZVoy3As8SthZnPnYKA8Bi6iBZMaTwHLWWGEkfQrrunJZlEryvhunuE5/PRjDYuan4GMgm+CNWKFYcHqW4DAMKiJwaPuPVV6ml6QFoSZ/xlUyvajy+Jcaay+zj7D1HjCbG4ijhN4qu8NqBWmUJPTQAPl/OUTl4Grcj9B3TmeJFfJvaC9KXPnVV+QKwPaaydxOrqSKP4FGVZ7lDbBWgsKgu4qeajQoDj5TcIFRR7R8gqbL01hNH6gkZYIi866qwKhSZuTYIkk5wXnPx+dVYBRWbh838SSd9iapMQlQhl+wxA01Ecc=
+  - secure: kQZ1U4kaqnYSPWMDUH9cU0UFbPc5VippBmXDCynh5di15I4QIUX7VC+cmQa7UT1xn4IS69y4Zk4WZsb+IGYulCxouqUVeVH3kXHp88NJe/22WatZ2Wqe2y1hY3ojM2vKVkqRml12TNR5yqT2rVe0vzQ1T1R/DBXn8CNHWu+wDMQrpVrWdGWFtDvQCYG4Q6p5eIhY8opPONDz8nIKy1w1SJcjq5fw8VPlQCrRS0wQdPkj97aapofJOfMfmIP8HFS31l5mA+NNRq2/GxMv9tVECCk9ykfIjZKVpY8nbyIduHGwbk964DZXLYi41l7WlWfXc0C86QpG/XHQLq9PlnA8n8ySs2Yvs8E+RK0wO1X+2XXjMme9xWupjSfEpQmSkc6MJ6OH4b5RJ4G4EpvkRh3riiCc179fzeJUW3RY6ldisJvL5M0C1OArp02RgFiXLmQTLE7UdoH57HgMvZCD6aViYaHzm7ovicjKBtnWmURiP0ViwIC9v2wldZZw2QBaSg9QbT9MFkjruY24wQWxDcfv2PtztdCbA/bNyLn1biO3D1CWMzdnIS9Y21JcDT3kSfVgoitP7lDKuJP0GQKPwymBgQ23Mypu0wni6O+4w51yY5XCpIkL80C8RGskKFy+bxpb8WJypTyfGbUMY+s5isWznRefFv0EEpxDEEcpzsaN+zk=
