@@ -36,8 +36,8 @@ def convert():
         i += 1
         percent = int(i / count * 100)
         if percent != last:
-          last = percent
-          print(str(percent) + '% converted...')
+            last = percent
+            print(str(percent) + '% converted...')
     end = time.time()
     print(end - start)
 
@@ -47,17 +47,17 @@ def convert():
     print('Saving Examples to CONLL...')
     print('0% written...')
     with open('models/train_data.conll', 'w') as f:
-      for doc in [data]:
-        for sentence, sent_entities in doc:
-          f.write('-DOCSTART- -X- O O\n')
-          i += 1
-          percent = int(i / count * 100)
-          if percent != last:
-            last = percent
-            print(percent, '% written...')
-          for token, BIO_tag in zip(sentence, sent_entities):
-            f.write('{} -X- _ {}\n'.format(token, BIO_tag))
-          f.write('\n')
+        for doc in [data]:
+            for sentence, sent_entities in doc:
+                f.write('-DOCSTART- -X- O O\n')
+                i += 1
+                percent = int(i / count * 100)
+                if percent != last:
+                    last = percent
+                    print(percent, '% written...')
+                for token, BIO_tag in zip(sentence, sent_entities):
+                    f.write('{} -X- _ {}\n'.format(token, BIO_tag))
+                f.write('\n')
     print('Export to CONLL Format Completed.')
 
 

@@ -95,7 +95,8 @@ def test_model(test_data):
         for ent in doc.ents:
             instances_tested += 1
             if annotations['entities'][0][2] != ent.label_:
-                print('Error in prediction {:s} should have been {:s} but found {:s}'.format(text, annotations['entities'][0][2], ent.label_))
+                print('Error in prediction {:s} should have been {:s} but found {:s}'
+                      .format(text, annotations['entities'][0][2], ent.label_))
                 errors.append((text, annotations, ent.label_))
     print('{0:f} instances contained entities...'.format(instances_tested))
     print('Error rate of {0:f}% for {:d} test instances.'.format((len(errors) * 100) / len(test_data), len(test_data)))

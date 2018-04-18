@@ -1,10 +1,9 @@
 '''
 Exceptions for API
 '''
-from flask import jsonify
 from api.utils import logger
 
-logger = logger.create_logger(__name__)
+LOGGER = logger.create_logger(__name__)
 
 class InvalidUsage(Exception):
     '''
@@ -20,10 +19,11 @@ class InvalidUsage(Exception):
         if status_code is not None:
             self.status_code = status_code
         self.payload = payload
-        logger.error(message)
+        LOGGER.error(message)
 
     def to_dict(self):
         '''
+        Returns the exception as a dictionary object.
         '''
         rv = dict(self.payload or ())
         rv['message'] = self.message

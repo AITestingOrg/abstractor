@@ -16,7 +16,7 @@ def test_valid_email_returns_valid_email():
     assert Abstractor().get_abstraction('email Joahsna@gmail.com') == ABSTRACTIONS['EMAIL']
 
 def test_invalid_email_returns_none():
-    assert Abstractor().get_abstraction('email qq') == None
+    assert Abstractor().get_abstraction('email qq') is None
 
 def test_invalid_input():
     with pytest.raises(Exception):

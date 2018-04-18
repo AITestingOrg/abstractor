@@ -61,7 +61,8 @@ def convert_and_export_emails():
                'word': content[:, 1],
                'label': abstraction}
     data_frame = pandas.DataFrame(df_dict)
-    data_frame.to_pickle(path=path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['EMAIL'])))
+    data_frame.to_pickle(path=path.join(dirname,
+                                        './models/{:s}.pickle'.format(ABSTRACTIONS['EMAIL'])))
 
 
 def import_all():
@@ -77,7 +78,8 @@ def load_first_names():
     Loads the first name DataFrame from a pickle
     '''
     dirname = path.dirname(__file__)
-    return pandas.read_pickle(path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['FIRST_NAME'])))
+    return pandas.read_pickle(path.join(dirname,
+                                        './models/{:s}.pickle'.format(ABSTRACTIONS['FIRST_NAME'])))
 
 
 def load_last_names():
@@ -85,11 +87,13 @@ def load_last_names():
     Loads the last name DataFrame from a pickle
     '''
     dirname = path.dirname(__file__)
-    return pandas.read_pickle(path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['LAST_NAME'])))
+    return pandas.read_pickle(path.join(dirname,
+                                        './models/{:s}.pickle'.format(ABSTRACTIONS['LAST_NAME'])))
 
 def load_emails():
     '''
     Loads the email DataFrame from a pickle
     '''
     dirname = path.dirname(__file__)
-    return pandas.read_pickle(path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['EMAIL'])))
+    return pandas.read_pickle(path.join(dirname,
+                                        './models/{:s}.pickle'.format(ABSTRACTIONS['EMAIL'])))
