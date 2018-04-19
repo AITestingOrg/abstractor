@@ -2,7 +2,7 @@
   "lang":"en",
   "name":"default",
   "version":"0.0.0",
-  "spacy_version":"2.0.2",
+  "spacy_version":">=2.0.11",
   "description":"",
   "author":"",
   "email":"",
@@ -11,7 +11,8 @@
   "vectors":{
     "width":0,
     "vectors":0,
-    "keys":0
+    "keys":0,
+    "name":"spacy_pretrained_vectors"
   },
   "pipeline":[
     "ner"
