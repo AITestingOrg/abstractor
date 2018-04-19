@@ -30,7 +30,6 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     tmp = TrainingData().all_examples()
     print('Seperate training data...')
     np.random.shuffle(tmp)
-    tmp = tmp[:1000]
     test_index = int(len(tmp) * 0.6)
     train_data = tmp[:test_index]
     test_data = tmp[test_index:]
