@@ -26,15 +26,15 @@ class Importer:
         '''
         return labels[np.random.randint(0, len(labels) - 1)]
 
-    def __get_from_file(self, path, delimeter=' '):
+    def __get_from_file(self, rel_path, delimeter=' '):
         content = None
-        file_path = path.join(self.dirname, path)
+        file_path = path.join(self.dirname, rel_path)
         with open(file_path) as file:
             content = file.readlines()
-        return np.array([np.array([y.replace('\n', '') for y in x.split(delimeter) if y != '']) for x in content if x != '\n'])
+        return np.array([x.split(delimeter)[0].replace('\n', '') for x in content if x != '\n'])
 
-    def __save_to_file(self, name):
-        data_frame = pandas.DataFrame(df_dict)
+    def __save_to_file(self, data, name):
+        data_frame = pandas.DataFrame(data)
         data_frame.to_pickle(path=path.join(self.dirname, './models/{:s}.pickle'.format(name)))
 
 
@@ -55,18 +55,19 @@ class Importer:
             np.random.shuffle(non_proper_nouns)
             np.random.shuffle(rand_numbers)
             np.random.shuffle(urls)
-            all_examples = np.concatenate((positive_examples[:5000], non_proper_nouns[:1000], rand_numbers[:500], urls[:500]))
+            all_examples = np.concatenate([positive_examples[:5000], non_proper_nouns[:1000], rand_numbers[:500], urls[:500]])
             if file_path[1] == ABSTRACTIONS['FIRST_NAME']:
                 labels = first_name_labels
             else:
                 labels = last_name_labels
-            all_examples = np.transpose([np.tile(labels, len(all_examples)), np.repeat(all_examples[:, 0], len(labels))])
+            all_examples = np.transpose([np.tile(labels, len(all_examples)), np.repeat(all_examples, len(labels))])
             abstraction = np.empty(len(all_examples), dtype=object)
-            abstraction[:] = file_path[1]
-            df_dict = {'input': np.core.defchararray.add(all_examples[:, 0], np.char.capitalize(all_examples[:, 1])),
-                       'word': all_examples[:, 1],
+            abstraction[:5000] = file_path[1]
+            abstraction[5000:] = '!{}'.format(file_path[1])
+            data = {'input': np.core.defchararray.add(all_examples[:,0], all_examples[:,1]),
+                       'word': all_examples[:,1],
                        'label': abstraction}
-            self.__save_to_file(file_path[1])
+            self.__save_to_file(data, file_path[1])
 
 
     def convert_and_export_emails(self):
@@ -81,22 +82,23 @@ class Importer:
         np.random.shuffle(non_proper_nouns)
         np.random.shuffle(rand_numbers)
         np.random.shuffle(urls)
-        all_examples = np.concatenate((positive_examples, non_proper_nouns[:1000], rand_numbers[:500], urls[:500]))
+        all_examples = np.concatenate([positive_examples, non_proper_nouns[:1000], rand_numbers[:500], urls[:500]])
         all_examples = np.transpose([np.tile(email_labels, len(all_examples)), np.repeat(all_examples, len(email_labels))])
         abstraction = np.empty(len(all_examples), dtype=object)
-        abstraction[:] = ABSTRACTIONS['EMAIL']
-        df_dict = {'input': np.core.defchararray.add(all_examples[:, 0], all_examples[:, 1]),
+        abstraction[:len(positive_examples)] = ABSTRACTIONS['EMAIL']
+        abstraction[len(positive_examples):] = '!{}'.format(ABSTRACTIONS['EMAIL'])
+        data = {'input': np.core.defchararray.add(all_examples[:, 0], all_examples[:, 1]),
                    'word': all_examples[:, 1],
                    'label': abstraction}
-        self.__save_to_file(ABSTRACTIONS['EMAIL'])
+        self.__save_to_file(data, ABSTRACTIONS['EMAIL'])
 
 
-    def import_all():
+    def import_all(self):
         '''
         Imports all data from sources.
         '''
-        convert_and_export_names()
-        convert_and_export_emails()
+        self.convert_and_export_names()
+        self.convert_and_export_emails()
 
 
     def load_first_names(self, limit=None):
