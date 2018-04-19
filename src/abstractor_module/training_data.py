@@ -7,9 +7,11 @@ from .model_utils import Importer
 
 class TrainingData:
     '''
+    Training data converted to NER format.
     '''
     def __init__(self):
         '''
+        Consturctor for setting up training data.
         '''
         self.importer = Importer()
 

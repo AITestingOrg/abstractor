@@ -11,10 +11,12 @@ from .labels import email_labels, first_name_labels, last_name_labels
 
 class Importer:
     '''
+    Importer and extractor for model data.
     '''
 
     def __init__(self):
         '''
+        Constructor for importer
         '''
         self.shared_nouns = None
         self.shared_urls = None
@@ -27,6 +29,12 @@ class Importer:
         return labels[np.random.randint(0, len(labels) - 1)]
 
     def __get_from_file(self, rel_path, delimeter=' '):
+        '''
+        Gets data from data file
+
+        @rel_path: relative path of file
+        @delimeter: file delimeter, defaults to ' '
+        '''
         content = None
         file_path = path.join(self.dirname, rel_path)
         with open(file_path) as file:
@@ -34,6 +42,12 @@ class Importer:
         return np.array([x.split(delimeter)[0].replace('\n', '') for x in content if x != '\n'])
 
     def __save_to_file(self, data, name):
+        '''
+        Saves a dictionary object as a Pandas DataFrame
+
+        @data: dictionary object
+        @name: name of file <name>.pickle
+        '''
         data_frame = pandas.DataFrame(data)
         data_frame.to_pickle(path=path.join(self.dirname, './models/{:s}.pickle'.format(name)))
 

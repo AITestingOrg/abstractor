@@ -10,7 +10,7 @@ def main():
     main function
     '''
     while True:
-        str_input = input('1. Test Input, 2. Import data, 3. Train Model, 4. Test Model, 5. Convert txt to capital (Enter 1-5):')
+        str_input = input('1. Test Input, 2. Import data, 3. Train Model, 4. Test Model (Enter 1-4):')
         if str_input == '1':
             str_input = input('Enter your input: ')
             abstract = abstractor.Abstractor()
@@ -33,19 +33,6 @@ def main():
             print('Testing model...')
             train.test_model(training_data.TrainingData().all_examples())
             print('Done.')
-        elif str_input == '5':
-            dirname = path.dirname(__file__)
-            paths = ['./abstractor_module/models/data/census-dist-all-first.txt', './abstractor_module/models/data/census-dist-all-last.txt']
-            for p in paths:
-                p = path.join(dirname, p)
-                contents = None
-                new = []
-                with open(p,'r')as file:
-                    contents = file.readlines()
-                for x in contents:
-                    new.append(x.capitalize())
-                with open(p,'w')as file:
-                    file.write(''.join(new))
         else:
             print('Invalid input')
 
