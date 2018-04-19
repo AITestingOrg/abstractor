@@ -76,8 +76,8 @@ class Importer:
                 labels = last_name_labels
             all_examples = np.transpose([np.tile(labels, len(all_examples)), np.repeat(all_examples, len(labels))])
             abstraction = np.empty(len(all_examples), dtype=object)
-            abstraction[:5000] = file_path[1]
-            abstraction[5000:] = '!{}'.format(file_path[1])
+            abstraction[:5000 * len(labels)] = file_path[1]
+            abstraction[5000 * len(labels):] = '!{}'.format(file_path[1])
             data = {'input': np.core.defchararray.add(all_examples[:,0], all_examples[:,1]),
                        'word': all_examples[:,1],
                        'label': abstraction}
@@ -99,8 +99,8 @@ class Importer:
         all_examples = np.concatenate([positive_examples, non_proper_nouns[:1000], rand_numbers[:500], urls[:500]])
         all_examples = np.transpose([np.tile(email_labels, len(all_examples)), np.repeat(all_examples, len(email_labels))])
         abstraction = np.empty(len(all_examples), dtype=object)
-        abstraction[:len(positive_examples)] = ABSTRACTIONS['EMAIL']
-        abstraction[len(positive_examples):] = '!{}'.format(ABSTRACTIONS['EMAIL'])
+        abstraction[:len(positive_examples) * len(email_labels)] = ABSTRACTIONS['EMAIL']
+        abstraction[len(positive_examples) * len(email_labels):] = '!{}'.format(ABSTRACTIONS['EMAIL'])
         data = {'input': np.core.defchararray.add(all_examples[:, 0], all_examples[:, 1]),
                    'word': all_examples[:, 1],
                    'label': abstraction}
