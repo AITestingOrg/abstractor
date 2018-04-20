@@ -5,12 +5,14 @@ zhan@msn@example.com
 .email@yahoo.com
 jack.@doll.com
 emil..sega@facebook.com
+email.gmail.com
 あいうえお@what.com
 hubert@gmail
 johns@-tele.com
 whenses@111.222.333.44444
 essay@verizon..com
 Abc..123@superawesomeemail.com
+@yahoo.com
 foo
 _$(&*_$^#_#%$_@#.com
 jane@outlook
@@ -28,3 +30,6 @@ kim.com
 @
 @@
 .@
+@msn.net
+email.fiu.edu
+my.msn.net
