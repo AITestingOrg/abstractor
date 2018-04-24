@@ -2,7 +2,7 @@
 Contains the example data for training spacy entity labels
 '''
 import numpy as np
-from .model_utils import Importer
+from model_utils import Importer
 
 
 class TrainingData:

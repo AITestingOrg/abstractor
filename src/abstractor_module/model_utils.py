@@ -5,8 +5,8 @@ used in the models
 from os import path
 import numpy as np
 import pandas
-from .abstractions import ABSTRACTIONS
-from .labels import email_labels, first_name_labels, last_name_labels
+from abstractions import ABSTRACTIONS
+from labels import email_labels, first_name_labels, last_name_labels
 
 
 class Importer:
