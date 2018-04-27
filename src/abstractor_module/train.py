@@ -93,7 +93,7 @@ def test_model(test_data):
         for ent in doc.ents:
             has_entity = True
             instances_tested += 1
-            if '!' not in annotations['entities'][0][2] and annotations['entities'][0][2] != ent.label_ or '!' in annotations['entities'][0][2] and ent.label_ == None:
+            if '!' not in annotations['entities'][0][2] and annotations['entities'][0][2] != ent.label_ or '!' in annotations['entities'][0][2] and ent.label_ is None:
                 print('Error in prediction {:s} should have been {:s} but found {:s}'.format(text, annotations['entities'][0][2], ent.label_))
                 errors.append((text, annotations, ent.label_))
         if not has_entity and '!' not in annotations['entities'][0][2]:
