@@ -4,7 +4,7 @@ Responsible for training the Spacy model
 from os import path
 import spacy
 import numpy as np
-from .training_data import first_name_examples, last_name_examples, email_examples
+from .training_data import TrainingData
 from .abstractions import ABSTRACTIONS
 
 NLP = spacy.blank('en')
@@ -27,11 +27,8 @@ def train_model(model_name='default', iters=15, drop_rate=0.35, save=False):
     save: if true it will save the model to disk
     '''
     print('Loading training data...')
-    first_name_data = first_name_examples()
-    last_name_data = last_name_examples()
-    email_data = email_examples()
+    tmp = TrainingData().all_examples()
     print('Seperate training data...')
-    tmp = np.concatenate((first_name_data, last_name_data, email_data))
     np.random.shuffle(tmp)
     test_index = int(len(tmp) * 0.6)
     train_data = tmp[:test_index]
@@ -92,11 +89,16 @@ def test_model(test_data):
     instances_tested = 0
     for text, annotations in test_data:
         doc = nlp(text)
+        has_entity = False
         for ent in doc.ents:
+            has_entity = True
             instances_tested += 1
-            if annotations['entities'][0][2] != ent.label_:
-                print('Error in prediction {:s} should have been {:s} but found {:s}'
-                      .format(text, annotations['entities'][0][2], ent.label_))
+            if '!' not in annotations['entities'][0][2] and annotations['entities'][0][2] != ent.label_ or '!' in annotations['entities'][0][2] and ent.label_ == None:
+                print('Error in prediction {:s} should have been {:s} but found {:s}'.format(text, annotations['entities'][0][2], ent.label_))
                 errors.append((text, annotations, ent.label_))
+        if not has_entity and '!' not in annotations['entities'][0][2]:
+            print('Error in prediction {:s} should have been {:s} but found {:s}'.format(text, annotations['entities'][0][2], 'None'))
+            errors.append((text, annotations, None))
+
     print('{0:f} instances contained entities...'.format(instances_tested))
-    print('Error rate of {0:f}% for {:d} test instances.'.format((len(errors) * 100) / len(test_data), len(test_data)))
+    print('Error rate of {}% for {} test instances.'.format((len(errors) * 100) / len(test_data), len(test_data)))
