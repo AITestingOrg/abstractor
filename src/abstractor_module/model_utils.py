@@ -79,8 +79,8 @@ class Importer:
             abstraction[:5000 * len(labels)] = file_path[1]
             abstraction[5000 * len(labels):] = '!{}'.format(file_path[1])
             data = {'input': np.core.defchararray.add(all_examples[:,0], all_examples[:,1]),
-                       'word': all_examples[:,1],
-                       'label': abstraction}
+                    'word': all_examples[:,1],
+                    'label': abstraction}
             self.__save_to_file(data, file_path[1])
 
 
@@ -104,8 +104,8 @@ class Importer:
         abstraction[:len(positive_examples) * len(email_labels)] = ABSTRACTIONS['EMAIL']
         abstraction[len(positive_examples) * len(email_labels):] = '!{}'.format(ABSTRACTIONS['EMAIL'])
         data = {'input': np.core.defchararray.add(all_examples[:, 0], all_examples[:, 1]),
-                   'word': all_examples[:, 1],
-                   'label': abstraction}
+                'word': all_examples[:, 1],
+                'label': abstraction}
         self.__save_to_file(data, ABSTRACTIONS['EMAIL'])
 
 
@@ -131,6 +131,7 @@ class Importer:
         '''
         dirname = path.dirname(__file__)
         return pandas.read_pickle(path.join(dirname, './models/{:s}.pickle'.format(ABSTRACTIONS['LAST_NAME'])))
+
 
     def load_emails(self, limit=None):
         '''

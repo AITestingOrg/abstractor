@@ -40,7 +40,6 @@ class TrainingData:
         return np.array([(row['input'], {'entities': [(len(row['input']) - len(row['word']), len(row['input']), row['label'])]})
                          for index, row in emails_df.iterrows()], dtype=object)
 
-
     def all_examples(self):
         '''
         Returns a spaCy model for all examples

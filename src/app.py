@@ -1,7 +1,6 @@
 '''
 Main file for API
 '''
-import logging
 from os import environ
 from api.factory import create_app
 
