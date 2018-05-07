@@ -7,7 +7,7 @@ before_install:
 - docker login -u=$DOCKER_USERNAME -p=$DOCKER_PASSWORD
 - echo "Docker Hub credentials are working"
 install:
-- pip install spacy
+- pip install -U spacy
 - python -m spacy download en
 - pip install -r requirements.txt
 script:
