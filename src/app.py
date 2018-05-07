@@ -11,5 +11,5 @@ if __name__ == "__main__":
     '''
     API entry point with configurable port
     '''
-    PORT = int(environ.get("PORT", 5000))
+    PORT = int(environ.get("PORT", 8080))
     APP.run(host='0.0.0.0', port=PORT)
