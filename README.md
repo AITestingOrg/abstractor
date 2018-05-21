@@ -1,4 +1,4 @@
-# Abstractor Prototype
+# spaCy Service
 [![Build Status](https://travis-ci.org/AITestingOrg/abstractor.svg?branch=master)](https://travis-ci.org/AITestingOrg/abstractor)
 
 Small prototype, currently only scaffolding for converting values to abstractions.
@@ -6,6 +6,8 @@ Small prototype, currently only scaffolding for converting values to abstraction
 ## Features
 * Convert values like 'Jack' to VALID_NAME
 * Return random, concrete examples of abstractions
+** Supports First Name, Last Name,
+** Coming soon Full Name, Currency
 
 ## Running the API
 ```bash

@@ -2,7 +2,7 @@
 API tasks
 '''
 import numpy as np
-from abstractor_module import abstractions, model_utils, abstractor
+from abstractor_module import model_utils, abstractor, abstractions
 from api.utils import logger
 
 logger = logger.create_logger(__name__)
