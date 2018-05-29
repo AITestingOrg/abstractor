@@ -6,7 +6,7 @@ from api.utils.exceptions import InvalidUsage
 from api.tasks.abstraction_tasks import get_abstraction, get_concrete_example, get_abstractions
 from api.utils import logger
 
-abstraction_bp = Blueprint('abstraction', __name__, url_prefix='/abstraction')
+abstraction_bp = Blueprint('abstraction', __name__, url_prefix='/api/v1/abstraction')
 
 logger = logger.create_logger(__name__)
 
@@ -15,7 +15,7 @@ def get_abstractions_supported():
     '''
     Returns supported abstractions
     '''
-    logger.info('REQUEST: /abstractions')
+    logger.info('REQUEST: /supported')
     return jsonify(get_abstractions())
 
 
