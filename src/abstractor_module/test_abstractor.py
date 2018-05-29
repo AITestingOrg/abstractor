@@ -13,7 +13,7 @@ def test_last_name_returns_valid_last_name():
     assert Abstractor().get_abstraction('last name Smith') == ABSTRACTIONS['LAST_NAME']
 
 def test_valid_email_returns_valid_email():
-    assert Abstractor().get_abstraction('Email Joahsna@gmail.com') == ABSTRACTIONS['EMAIL']
+    assert Abstractor().get_abstraction('Email joahsna@gmail.com') == ABSTRACTIONS['EMAIL']
 
 def test_first_name2_returns_valid_first_name():
     assert Abstractor().get_abstraction('First name* William') == ABSTRACTIONS['FIRST_NAME']
@@ -22,7 +22,7 @@ def test_last_name2_returns_valid_last_name():
     assert Abstractor().get_abstraction('Sur name Jones') == ABSTRACTIONS['LAST_NAME']
 
 def test_valid_email2_returns_valid_email():
-    assert Abstractor().get_abstraction('Email Joahs@gmail.com') == ABSTRACTIONS['EMAIL']
+    assert Abstractor().get_abstraction('Email jones@gmail.com') == ABSTRACTIONS['EMAIL']
 
 def test_invalid_email_returns_none():
     assert Abstractor().get_abstraction('Email quiet.') == None
